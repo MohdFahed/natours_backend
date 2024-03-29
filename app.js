@@ -9,8 +9,12 @@ const userRoute = require('./routes/userRoute')
 
 /**Middleware */
 app.use(express.json())  // medile ware
-app.use(morgan('dev'))   // middleware for  request logger
-app.use(express.static(`${__dirname}/public`)) ; 
+app.use(express.static(`${__dirname}/public`)) ;   // middleware for serving static page and images
+
+
+if(process.env.NODE_ENV === 'development'){
+  app.use(morgan('dev'))   // middleware for  request logger
+}
 app.use((req,res,next)=>{
  console.log("Hi I am from middleware....");
  next();
